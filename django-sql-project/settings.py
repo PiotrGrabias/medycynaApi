@@ -18,7 +18,8 @@ import mimetypes
 mimetypes.add_type("text/css", ".css", True)
 
 load_dotenv()
-
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'customerapi'
+    'customerapi',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -94,27 +95,16 @@ WSGI_APPLICATION = 'django-sql-project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': os.getenv("DB_NAME"),
-        'HOST': os.getenv("DB_SERVER"),
+        'NAME': 'my-db',
+        'USER': 'pjerdson',
+        'PASSWORD': 'P@jerdson1!',
+        'HOST': 'medycynaserver.database.windows.net',
         'PORT': '1433',
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
         'OPTIONS': {
-	            'driver': 'ODBC Driver 17 for SQL Server',
-	        },
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'extra_params': "Encrypt=yes;TrustServerCertificate=no",
+        },
     }
-
-    #To connect Azure SQL DB using MSI (Managed Service Identity)
-    # {
-    #     'ENGINE': 'mssql',
-    #     'HOST': 'xyz.database.windows.net',
-    #     'NAME': 'mydb', 
-    #     'PORT': '', 
-    #     'Trusted_Connection': 'no', 
-    #     'OPTIONS': { 
-    #         'driver': 'ODBC Driver 17 for SQL Server', 
-    #         'extra_params': "Authentication=ActiveDirectoryMsi;Encrypt=yes;TrustServerCertificate=no" }
-    # }
 }
 
 # Password validation

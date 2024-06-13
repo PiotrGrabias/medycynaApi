@@ -1,8 +1,7 @@
 from django.contrib import admin
 
-from customerapi.models import Customer, OrderDetail, Product
+from .models import Entry
 
 # Register your models here.
-admin.site.register(Customer)
-admin.site.register(Product)
-admin.site.register(OrderDetail)
+admin.site.register(Entry)
+
